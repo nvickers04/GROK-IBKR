@@ -1,0 +1,8 @@
+Risk Management Outline
+
+Shared metrics and models for probability.
+Inspirations: pyfolio (tear sheets), Riskfolio-Lib (optim), tf-quant-finance (stochastics).
+Use in Agents: Risk/Reflection.
+A2A Fit: Shareable calcs.
+
+Reasoning: Ensures consistent risk; quantifiable backups for profitability.

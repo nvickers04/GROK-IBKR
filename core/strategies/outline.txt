@@ -1,0 +1,8 @@
+Strategies Outline
+
+Shared algo concepts.
+Inspirations: Qlib (ML), backtrader (indicators), nautilus_trader (mods).
+Use in Agents: Strategy/Learning.
+A2A Fit: Proposal templates.
+
+Reasoning: Modular for macro-micro; traceable for edge refinements.

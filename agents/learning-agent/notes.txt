@@ -1,0 +1,9 @@
+Learning Agent Notes
+
+Role: ML-driven edge refinement from experience.
+Inspirations: FinRL-Library (RL training), tf-quant-finance (model calibration), Qlib (full ML).
+A2A: Integrates Reflection data; updates models for Strategy/Risk.
+Reflection Tie: Applies iterations to probabilities.
+IBKR Fit: Adapts to real data patterns.
+
+Reasoning: Enables adaptive system; traceable backups for funded ML profitability.

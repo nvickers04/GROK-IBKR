@@ -1,0 +1,9 @@
+Reflection Agent Notes
+
+Role: Post-outcome reviews for iterative improvements.
+Inspirations: Zipline (backtesting), FinRL-Library (RL sims), pyfolio (analytics).
+A2A: Shares insights with Learning; receives from Execution.
+Reflection Tie: Core loop—evaluates probabilities, refines edges.
+IBKR Fit: Uses real trade data.
+
+Reasoning: Manages experiential learning; backs structural reasoning for reduced losses via audits.

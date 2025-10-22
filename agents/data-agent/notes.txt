@@ -1,0 +1,9 @@
+Data Agent Notes
+
+Role: Macro data ingestion and processing for A2A feeds.
+Inspirations: yfinance (real-time queries), tsfresh (feature extraction), Qlib (data pipelines).
+A2A: Outputs cleaned DataFrames to Strategy/Risk Agents.
+Reflection Tie: Provides historical data for backtest reviews.
+IBKR Fit: Complements pulls with external validation.
+
+Reasoning: Organizes inputs for broad view; backs traceability by automating features for ML edges in funded phases.

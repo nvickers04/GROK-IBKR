@@ -1,0 +1,8 @@
+Data Handling Outline
+
+Conceptual utilities for shared data processing.
+Inspirations: yfinance (fetching), tsfresh (features), Qlib (pipelines).
+Use in Agents: Data Agent primary; A2A feeds.
+Reflection Fit: Historical storage for reviews.
+
+Reasoning: Centralizes for organization; backs broad view with traceable inputs.

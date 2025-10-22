@@ -1,0 +1,15 @@
+Agents Overview
+
+This file summarizes each agent, their roles in macro-micro flows, A2A interactions, reflection ties, and resource inspirations. All include reasoning for structural backups.
+
+- Data Agent: Handles macro data ingestion (e.g., market quotes). A2A: Shares cleaned data to Strategy/Risk. Resources: yfinance, tsfresh, Qlib. Reasoning: Foundation for broad view; ensures traceable inputs for funded accuracy.
+
+- Strategy Agent: Generates macro-micro strategies with train-of-thought (e.g., proposal steps). A2A: Consults Risk, passes to Execution. Resources: backtrader, Qlib, nautilus_trader. Reasoning: Bridges analysis to action; backs profitability via optimized proposals.
+
+- Risk Agent: Assesses probabilities and risks (e.g., Sharpe-based profit estimates). A2A: Inputs from Strategy, outputs to Reflection. Resources: pyfolio, tf-quant-finance. Reasoning: Core for risk-averse decisions; provides quantitative backups for funding audits.
+
+- Execution Agent: Manages micro trades over IBKR. A2A: Receives from Strategy, logs to Reflection. Resources: nautilus_trader, ib_nope. Reasoning: Ensures real-world linkage; organizes for seamless scalability.
+
+- Reflection Agent: Reviews outcomes for iterations (e.g., backtest metrics). A2A: Shares insights with Learning. Resources: Zipline, FinRL-Library, pyfolio. Reasoning: Manages experiential loops; backs structural reasoning on edge improvements.
+
+- Learning Agent: Refines models via ML/experience (e.g., RL updates). A2A: Integrates reflection data. Resources: FinRL-Library, tf-quant-finance, Qlib. Reasoning: Enables adaptive profitability; traceable for funded ML evolutions.

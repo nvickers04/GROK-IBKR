@@ -1,0 +1,8 @@
+Backtesting Outline
+
+Simulation tools for validation.
+Inspirations: Zipline (engines), backtrader (events), FinRL-Library (RL sims).
+Use in Agents: Reflection/Learning.
+Reflection Fit: Core for iterations.
+
+Reasoning: Supports experiential loops; backs funding with conceptual testing.

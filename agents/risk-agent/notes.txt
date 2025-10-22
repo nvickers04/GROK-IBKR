@@ -1,0 +1,9 @@
+Risk Agent Notes
+
+Role: Probability assessments and risk management.
+Inspirations: pyfolio (performance metrics), tf-quant-finance (stochastic models), tsfresh (risk features).
+A2A: Inputs strategies, outputs adjusted probs to Execution/Reflection.
+Reflection Tie: Supplies metrics for reviews.
+IBKR Fit: Uses portfolio data for real-time calcs.
+
+Reasoning: Ensures risk-averse profitability; quantifiable backups for funding on probability-driven decisions.

@@ -1,0 +1,8 @@
+A2A Protocol
+
+Defines agent-to-agent communication standards.
+- Formats: JSON for events (backtrader-inspired), DataFrames for data (pandas from Qlib/yfinance).
+- Flows: Data → Strategy → Risk → Execution (with final reflection pull from Reflection for time/common-sense checks via exchange-calendars) → Reflection → Learning (loop back).
+- Reflection Integration: Include metrics (pyfolio) and time validations in messages for reviews.
+
+Reasoning: Standardizes for robust scalability; backs funding with efficient, auditable interactions, now including time-constrained clarity.

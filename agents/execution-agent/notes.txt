@@ -1,0 +1,9 @@
+Execution Agent Notes
+
+Role: Micro trade executions over IBKR, now with a final pre-execution reflection for time constraints and common-sense clarity.
+Inspirations: nautilus_trader (broker integration), ib_nope (automation), backtrader (live modes), exchange-calendars (trading schedules for market hours/holidays checks).
+A2A: Receives from Strategy/Risk; logs outcomes to Reflection. For final reflection: Pulls quick validation from Reflection Agent via A2A (e.g., shared time-check data).
+Reflection Tie: Triggers last loop before commit—validate time (e.g., is market open? via exchange-calendars concepts) and common-sense test (e.g., check for delusions like infeasible trades, ensure clarity in logic). If fails, iterate; if passes, execute.
+IBKR Fit: Direct API handling, with time validations to avoid off-hours submissions.
+
+Reasoning: Enhances robustness by adding time-constrained reflection; backs organizational structure for funded reliability, reducing risks of invalid or delusional executions through traceable market-reality checks.

@@ -1,0 +1,9 @@
+Strategy Agent Notes
+
+Role: Macro-micro strategy generation with train-of-thought reasoning.
+Inspirations: backtrader (event-driven logic), Qlib (ML strategies), nautilus_trader (modular execution sims).
+A2A: Shares proposals with Risk/Execution; receives data from Data Agent.
+Reflection Tie: Iterates based on Reflection feedback.
+IBKR Fit: Preps orders for Execution.
+
+Reasoning: Central for daily flows; provides backups for profitable proposals via conceptual optimizations.
