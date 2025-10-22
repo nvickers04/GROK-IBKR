@@ -1,0 +1,27 @@
+# Risk Constraints Configuration
+# Dynamically managed by Risk Agent post-reflection; loaded by all agents via A2A for closed-loop enforcement.
+# Structural Reasoning: Enables self-improving limits (e.g., adjusted via weekly SD batches); traceable for funding audits on risk mitigation without manual tweaks. Simulations (pre-launch Zipline-inspired) set baselines; post-launch experiential (no slippage sims—conservative tolerances only).
+
+# Position and Exposure Limits
+max_position_size: 0.05  # Max % of portfolio per trade; auto-tightens on variance >1 SD (Risk Agent sims)
+max_leverage: 2.0  # Overall leverage cap; reflects stochastic sims from tf-quant-finance (pre-launch only)
+max_daily_trades: 10  # Batch-enforced to avoid over-execution noise; adjustable via reflection variances
+
+# Drawdown and POP Safeguards
+max_drawdown: 0.05  # 5% portfolio drawdown threshold; triggers reflection loop (Risk Agent auto-adjusts post-sim)
+pop_floor: 0.60  # Minimum theoretical POP for approval; adjusted via pyfolio metrics and USD benchmark
+variance_sd_threshold: 1.0  # SD cutoff for weekly batch triggers; recalibrated experientially (Risk Agent core)
+
+# Time and Sanity Constraints
+max_hold_days: 30  # Trade duration cap; ties to exchange-calendars for sessions (Execution no-trade ref)
+slippage_tolerance: 0.02  # % slippage allowance; conservative (no accurate sims—live IBKR only); Risk Agent tightens on variances
+
+# USD Benchmark for No-Trade Decisions
+usd_hold_alpha_floor: 0.0  # Minimum alpha vs USD (inflation-adjusted) to execute; Execution references for "no trade" as valid option
+inflation_proxy: 0.025  # Annual % for USD opportunity cost (e.g., vs gold/crypto/FX); Risk Agent updates quarterly via sims
+
+# Changelog Reference
+last_update: "2025-10-22"  # Timestamped by Risk Agent; high-level summary in core/learning-data-changelog.txt
+adjustment_rationale: "Initial baselines; next update post-Week 42 batch if SD >1.0 (Risk Agent sims pre-launch; experiential post)"
+
+Reasoning: YAML format for readability in VS Code; keys as A2A-queryable (e.g., JSON exports); backs closed-loop profitability by enabling Risk-led auto-adjustments of all metrics, with pre-launch sims (slippage-limited) and USD ties for no-trade discipline, experiential for ~10-20% risk reduction in audits.

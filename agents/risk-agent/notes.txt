@@ -1,9 +1,23 @@
 Risk Agent Notes
 
-Role: Probability assessments and risk management.
-Inspirations: pyfolio (performance metrics), tf-quant-finance (stochastic models), tsfresh (risk features).
-A2A: Inputs strategies, outputs adjusted probs to Execution/Reflection.
-Reflection Tie: Supplies metrics for reviews.
-IBKR Fit: Uses portfolio data for real-time calcs.
+Role: Probability assessments and risk management—core job: Dynamic adjustment of all metrics in config/risk-constraints.yaml for closed-loop self-improvement.
+Inspirations: pyfolio (performance metrics), tf-quant-finance (stochastic models), tsfresh (risk features), Riskfolio-Lib (optimization sims).
+A2A: Inputs strategies, outputs adjusted probs/limits to Execution/Reflection; broadcasts YAML updates (JSON diffs) to agents.
+Reflection Tie: Supplies metrics for reviews; auto-adjusts post-reflection (e.g., tighten pop_floor on variances).
+IBKR Fit: Uses portfolio data for real-time calcs; pre-launch sims only—no slippage accuracy.
 
-Reasoning: Ensures risk-averse profitability; quantifiable backups for funding on probability-driven decisions.
+Reasoning: Ensures risk-averse profitability as system guardian; quantifiable backups for funding on probability-driven, self-adjusting decisions without manual input.
+
+Stochastic Outputs for Batching
+- Generate daily JSON logs of stochastic models (e.g., Brownian motion or Monte Carlo sims for POP distributions via tf-quant-finance).
+- Include variance proxies (e.g., Sharpe ratios with randomness); feed to Learning Agent for weekly aggregation/SD thresholding.
+- A2A Formats: JSON for lightweight daily events; incorporate weekly batch references for contextual risk evals (e.g., adjust probs based on prior variances).
+- Consultation Role: Respond to Learning Agent traces on inconsistencies (e.g., validate theoretical POP against stochastic baselines).
+
+Dynamic Management of Risk Constraints
+- Load config/risk-constraints.yaml at assessment start (e.g., YAML keys for max_position_size, variance_sd_threshold—all adjustable by Risk Agent).
+- Post-reflection (e.g., after weekly batch from Learning Agent), simulate adjustments pre-launch (e.g., Zipline backtests for drawdown projections; conservative slippage tolerance—no accurate sims); post-launch, use experiential data for live tweaks.
+- Write updates via A2A (e.g., JSON diffs shared to agents); log high-level rationale to core/learning-data-changelog.txt (e.g., "Week 42: SD 1.2; reduced max_drawdown to 4.2% via sims").
+- Closed-Loop Enforcement: All agents reference YAML for limits (e.g., Execution queries slippage_tolerance); no manual edits—experiential triggers only; includes USD benchmark for no-trade alpha floors.
+
+Reasoning: Elevates Risk Agent to central self-improver; backs closed-loop profitability by integrating SD batches/simulations for dynamic safeguards of all metrics, providing auditable traces for funding on variance mitigation (pre-launch baselines, live experiential) without Learning Agent overload or slippage illusions.

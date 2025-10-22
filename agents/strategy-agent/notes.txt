@@ -7,3 +7,9 @@ Reflection Tie: Iterates based on Reflection feedback.
 IBKR Fit: Preps orders for Execution.
 
 Reasoning: Central for daily flows; provides backups for profitable proposals via conceptual optimizations.
+
+Integration with Weekly Batches
+- Receive weekly batch references via A2A from Learning Agent (e.g., DataFrames summarizing stochastic variances/SD thresholds) to refine train-of-thought proposals (e.g., incorporate adjusted liquidity signals).
+- Consultation Role: Assist in traces for inconsistencies (e.g., validate proposal alignment with upstream data).
+
+Reasoning: Bridges analysis to action with empirical context; backs profitability by evolving macro-micro strategies via weekly batches, providing traceable optimizations for funding audits on experiential alignments.

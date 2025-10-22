@@ -1,9 +1,23 @@
-Reflection Agent Notes
+Risk Agent Notes
 
-Role: Post-outcome reviews for iterative improvements.
-Inspirations: Zipline (backtesting), FinRL-Library (RL sims), pyfolio (analytics).
-A2A: Shares insights with Learning; receives from Execution.
-Reflection Tie: Core loop—evaluates probabilities, refines edges.
-IBKR Fit: Uses real trade data.
+Role: Probability assessments and risk management.
+Inspirations: pyfolio (performance metrics), tf-quant-finance (stochastic models), tsfresh (risk features).
+A2A: Inputs strategies, outputs adjusted probs to Execution/Reflection.
+Reflection Tie: Supplies metrics for reviews.
+IBKR Fit: Uses portfolio data for real-time calcs.
 
-Reasoning: Manages experiential learning; backs structural reasoning for reduced losses via audits.
+Reasoning: Ensures risk-averse profitability; quantifiable backups for funding on probability-driven decisions.
+
+Stochastic Outputs for Batching
+- Generate daily JSON logs of stochastic models (e.g., Brownian motion or Monte Carlo sims for POP distributions via tf-quant-finance).
+- Include variance proxies (e.g., Sharpe ratios with randomness); feed to Learning Agent for weekly aggregation/SD thresholding.
+- A2A Formats: JSON for lightweight daily events; incorporate weekly batch references for contextual risk evals (e.g., adjust probs based on prior variances).
+- Consultation Role: Respond to Learning Agent traces on inconsistencies (e.g., validate theoretical POP against stochastic baselines).
+
+Dynamic Management of Risk Constraints
+- Load config/risk-constraints.yaml at assessment start (e.g., YAML keys for max_position_size, variance_sd_threshold).
+- Post-reflection (e.g., after weekly batch from Learning Agent), simulate adjustments (e.g., tighten pop_floor if SD variance >1.0 using tf-quant-finance projections).
+- Write updates via A2A (e.g., JSON diffs shared to agents); log high-level rationale to core/learning-data-changelog.txt (e.g., "Week 42: SD 1.2; reduced max_drawdown to 4.2%").
+- Closed-Loop Enforcement: All agents reference YAML for limits (e.g., Execution queries slippage_tolerance); no manual edits—experiential triggers only.
+
+Reasoning: Shifts constraints to self-improving loop via Risk-led adjustments; backs closed-loop profitability by integrating SD batches for dynamic safeguards, providing auditable traces for funding on variance mitigation without Learning Agent overload.

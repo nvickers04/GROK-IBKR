@@ -7,3 +7,11 @@ Reflection Tie: Provides historical data for backtest reviews.
 IBKR Fit: Complements pulls with external validation.
 
 Reasoning: Organizes inputs for broad view; backs traceability by automating features for ML edges in funded phases.
+
+Weekly Adaptations from Learning Agent
+- Receive batched DataFrames via A2A from Learning Agent (e.g., stochastic variance summaries with SD thresholds).
+- Implement changes if triggered (e.g., refine yfinance queries or tsfresh extractions for liquidity/volatility signals based on weekly references).
+- A2A Integration: Use shared DataFrames for reference snapshots; respond to consultations on input inconsistencies (e.g., trace incomplete logs back to ingestion gaps).
+- Changelog: Log high-level implementations in core/learning-data-changelog.txt (e.g., "Implemented Week 42 batch: Enhanced feature coverage +15%; pre/post SD variance noted").
+
+Reasoning: Anchors macro inputs with empirical stability; ensures broad market views adapt deliberately via weekly/SD batches, backing structural traceability for funding audits on how refinements mitigate real-vs-theoretical gaps in IBKR executions.

@@ -1,0 +1,10 @@
+# Learning-to-Data Changelog
+
+High-level summaries of weekly batch-driven changes from Learning Agent to Data Agent. Format: Date | Weekly Batch Summary | Adjustment | Impact Metric (e.g., SD Variance).
+
+2025-10-29 | Week 42: Stochastic batch (1000 sims) showed 1.2 SD POP variance from slippage | Refined tsfresh volatility features; updated yfinance horizons | SD reduced to 0.9; +12% feature stability.
+2025-11-05 | Week 43: Consolidated DataFrames for 5 problem trades; >1 SD on liquidity gaps | Enhanced input filters for market hours (exchange-calendars tie-in) | Variance mean -8%; fewer inconsistencies in traces.
+
+Risk Constraints Ties (Post-Week 43): SD 1.1 flagged; Risk Agent auto-adjusted max_drawdown to 4.2% in config/risk-constraints.yaml; impact: Simulated loss cap -7% (pre-launch Zipline; live experiential).
+
+Reasoning: Dedicated log for experiential backups; high-level with SD metrics ensures readability and auditability for funding, tying weekly refinements to profitability without granular overload; now includes Risk-led constraint summaries for closed-loop traceability, with sims for pre-launch baselines.

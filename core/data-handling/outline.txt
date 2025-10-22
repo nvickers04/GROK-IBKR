@@ -1,8 +1,12 @@
 Data Handling Outline
 
-Conceptual utilities for shared data processing.
-Inspirations: yfinance (fetching), tsfresh (features), Qlib (pipelines).
-Use in Agents: Data Agent primary; A2A feeds.
-Reflection Fit: Historical storage for reviews.
+Centralized data processing inspired by yfinance (fetching), tsfresh (feature extraction), and Qlib (pipelines). Primary use in Data Agent for ingestion and sharing via A2A feeds; supports reflection via historical storage.
 
-Reasoning: Centralizes for organization; backs broad view with traceable inputs.
+Reasoning: Centralizes inputs for traceability, enabling broad market views and macro-micro transitions without siloed data.
+
+Batching and Changelog Integration
+- Incorporate weekly Learning Agent directives into pipelines (e.g., tsfresh extractions refined per SD-thresholded batches from stochastic summaries).
+- Maintain core/learning-data-changelog.txt as dedicated log for changes (high-level format: Date | Weekly Batch Summary | Adjustment | Impact Metric, e.g., "2025-10-29 | Variance >1 SD | Volatility filter update | +12% feature stability").
+- A2A Ties: Use DataFrames for batch references; support consultations on input traces.
+
+Reasoning: Modularizes shared utilities with weekly stability; provides centralized backups for experiential flows, ensuring funding audits trace how stochastic batching enhances data quality without over-adjustments.

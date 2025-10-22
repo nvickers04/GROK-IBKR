@@ -1,6 +1,6 @@
 # Resource-to-Agent Mapping
 
-This mapping assigns top resources to agents, detailing how concepts support A2A, reflection, IBKR, and project pillars (macro-micro flows, train-of-thought, probability, trading, learning).
+This mapping assigns top resources to agents, detailing how concepts support A2A, reflection, IBKR, and project pillars (macro-micro flows, train-of-thought, probability, trading, learning, closed-loop constraints).
 
 | Resource (Rank) | Primary Agent(s) | Secondary Agent(s) | Mapping Details & A2A/Reflection Fit | IBKR Integration Notes | Reasoning (Backup for Funding) |
 |-----------------|------------------|--------------------|------------------------------|-------------------------|---------------------------------|
@@ -16,4 +16,7 @@ This mapping assigns top resources to agents, detailing how concepts support A2A
 | tsfresh (10) | Data Agent, Learning Agent | Risk Agent | Feature extraction: Data Agent for macro time series processing, Learning Agent for ML features (experiential signals). A2A: Features shared for probability calcs; Reflection: Auto-features for outcome analysis. | No direct, but processes IBKR data. | Time series ML for edge discovery; backs agent organization by automating inputs, scalable for funded ML refinements. |
 | exchange-calendars | Execution Agent, Reflection Agent | Data Agent | Trading schedules: Execution Agent for final time-constraint checks (e.g., market hours validation before trades), Reflection Agent for incorporating in reviews. A2A: Shares calendar data for common-sense tests; Reflection: Ensures clarity by avoiding delusional off-hours executions. | Partial: Validates sessions for IBKR submissions. | Time-focused for constraints; enhances final reflection step, providing backups for funded risk reduction through reality-based validations.
 
-Reasoning: Mappings ensure closed-loop system (e.g., Data feeds Strategy, Reflection iterates Learning), with backups for A2A efficiency and profitability; exchange-calendars adds time robustness.
+Research/Data Expansion Mapping
+- **X Tools (New)** | Data/Research Agent | Strategy Agent | Semantic/keyword searches (e.g., x_semantic_search for Musk sentiment) for contextual gaps; A2A: JSON summaries to Strategy for narrative adjustments; Reflection: Historical event reviews for edges. | Partial: Complements real-time IBKR. | Macro (event impacts), Learning (sentiment ML). | Inspire | Fills strategy gaps with non-real-time feeds; backs closed-loop by enriching batches, traceable for funding on contextual profitability.
+
+Reasoning: Mappings ensure closed-loop system (e.g., Data feeds Strategy, Reflection iterates Learning, Risk adjusts YAML), with backups for A2A efficiency and profitability; exchange-calendars adds time robustness; now includes Research expansion and Risk sizing priority for self-improvement coherence.
