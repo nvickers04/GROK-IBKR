@@ -2,11 +2,11 @@ Learning Agent Notes
 
 Role: ML-driven edge refinement from experience—parallel sim training to accelerate proficiency without excessive trades.
 Inspirations: FinRL-Library (RL training), tf-quant-finance (model calibration), Qlib (full ML).
-A2A: Integrates Reflection data; updates models for Strategy/Risk (no direct constraint adjustments).
+A2A: Integrates Reflection data; updates models for Strategy/Risk (no direct constraint adjustments); distributes processed sim knowledge to all agents.
 Reflection Tie: Applies iterations to probabilities; runs offline sims concurrently with real data.
 IBKR Fit: Adapts to real data patterns; sims complement paper trading.
 
-Reasoning: Enables adaptive system; traceable backups for funded ML profitability with parallel sim acceleration.
+Reasoning: Enables adaptive system; traceable backups for funded ML profitability with parallel sim acceleration, explicitly tying to targets (e.g., sims boost ROI 5% vs baseline).
 
 Weekly Batching for Stochastic Evaluations
 - Aggregate daily JSON logs from Risk Agent (e.g., stochastic runs like Monte Carlo paths via tf-quant-finance) into weekly DataFrames for variance analysis (actual vs theoretical POP).
@@ -18,7 +18,7 @@ Weekly Batching for Stochastic Evaluations
 
 Parallel Simulation Training
 - Run offline Zipline sims (historical backtests for sizing/hold days) and tf-quant-finance sims (stochastic POP variance projections) in parallel with real experiential data.
-- Store results in docs/sim-training-log.txt (e.g., "Sim Week 42: Zipline +5% sizing accuracy; tf +3% variance fit").
+- Process results internally (per-week summaries); distribute knowledge via A2A DataFrames to all agents (e.g., "Sizing lift +1.2% ROI" to Strategy for proposals, Risk for constraints).
 - Feed sim outputs to weekly batches for model updates (e.g., blend with IBKR paper trading insights pre-launch).
 
-Reasoning: Accelerates ML proficiency with parallel sims (e.g., 5-10% edge lift without trades); backs closed-loop profitability by enriching batches with simulated data, traceable for funding audits without live risk or years-long training.
+Reasoning: Accelerates ML proficiency with parallel sims (e.g., 5-10% edge lift without trades); backs closed-loop profitability by enriching batches with simulated data processed by Learning, distributed to all agents for contextual edges, traceable for funding audits without live risk or years-long training, aligned to ROI targets.
