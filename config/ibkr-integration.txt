@@ -1,9 +1,2 @@
 IBKR Integration Notes
-
-Conceptual setup for brokerage linkage.
-Inspirations: ib_nope (TWS auto), nautilus_trader (broker support).
-Agents Involved: Execution (primary), Data (pulls).
-A2A Fit: Validate signals before API calls.
-Reflection Tie: Log trades for reviews.
-
-Reasoning: Ensures real profitability; backs funding with secure, traceable bridges.
+Conceptual setup for brokerage linkage. Inspirations: ib_nope (TWS auto), nautilus_trader (broker support). Agents Involved: Execution (primary), Data (pulls). A2A Fit: Validate signals before API calls. Reflection Tie: Log trades for reviews. Reasoning: Ensures real profitability; backs funding with secure, traceable bridges; multi-asset (options/FX) for Strategy expansion.

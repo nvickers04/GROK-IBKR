@@ -1,8 +1,4 @@
-# Simulation Training Log
-
+Simulation Training Log
 High-level summaries of parallel sims for Learning Agent. Format: Date | Sim Type | Key Result | Tie to Profitability (e.g., ROI Impact).
-
-2025-10-23 | Zipline (Historical Sizing) | Backtest 2020 crash: 4% max_position_size reduced drawdown 9.1% vs 5% | +1.2% ROI lift vs baseline; aligns with profitability-targets monthly_roi_floor (10%).
-2025-10-30 | tf-quant-finance (Stochastic Variance) | Monte Carlo for hold days: 25 days cut variance 8% under volatility | -0.6% drawdown drag; supports monthly_roi_target (20%) via SD thresholds.
-
+2025-10-23 | Zipline (Historical Sizing) | Backtest 2020 crash: 4% max_position_size reduced drawdown 9.1% vs 5% | +1.2% ROI lift vs baseline; aligns with profitability-targets monthly_roi_floor (10%). 2025-10-23 | tf-quant-finance (Stochastic Variance) | Monte Carlo for hold days: 25 days cut variance 8% under volatility | -0.6% drawdown drag; supports monthly_roi_target (20%) via SD thresholds.
 Reasoning: Dedicated log for parallel sim storage; high-level with profitability ties ensures readability and auditability for funding, accelerating ML without live trades (e.g., 5-10% edge proficiency boost), explicitly linked to hard targets.

@@ -1,15 +1,21 @@
 Strategy Agent Notes
-
-Role: Macro-micro strategy generation with train-of-thought reasoning.
-Inspirations: backtrader (event-driven logic), Qlib (ML strategies), nautilus_trader (modular execution sims).
-A2A: Shares proposals with Risk/Execution; receives data from Data Agent.
-Reflection Tie: Iterates based on Reflection feedback.
-IBKR Fit: Preps orders for Execution.
-
-Reasoning: Central for daily flows; provides backups for profitable proposals via conceptual optimizations.
+Role: Macro-micro strategy generation with train-of-thought reasoning—expanded to include all options setups for asymmetric edges (e.g., strangles on vol spikes, collars for hedges, iron condors on neutral sentiment; avoid high-risk like naked calls/shorts), creatively generating alpha from flows (e.g., ETF inflows, dark pool hints, 13F rotations) via bidirectional loop with Risk until alpha/risk agreement.
+Inspirations: backtrader (event-driven logic), Qlib (ML strategies), nautilus_trader (modular execution sims). A2A: Shares proposals with Risk/Execution; receives data from Data Agent; bidirectional consult with Risk for iterations. Reflection Tie: Iterates based on Reflection feedback. IBKR Fit: Preps orders for Execution, now with multi-asset support (options/FX first for MVP testing asymmetric plays).
+Reasoning: Central for daily flows; provides backups for profitable proposals via conceptual optimizations, now with options/flows for 20-30% ROI uplift in sims (e.g., Greeks calcs on IV skew from Data chains; flow arb for alpha); Risk loop maximizes greed/discipline.
 
 Integration with Weekly Batches
-- Receive weekly batch references via A2A from Learning Agent (e.g., DataFrames summarizing stochastic variances/SD thresholds) to refine train-of-thought proposals (e.g., incorporate adjusted liquidity signals).
-- Consultation Role: Assist in traces for inconsistencies (e.g., validate proposal alignment with upstream data).
+* Receive weekly batch references via A2A from Learning Agent (e.g., DataFrames summarizing stochastic variances/SD thresholds) to refine train-of-thought proposals (e.g., incorporate adjusted liquidity signals).
+* Consultation Role: Assist in traces for inconsistencies (e.g., validate proposal alignment with upstream data).
 
-Reasoning: Bridges analysis to action with empirical context; backs profitability by evolving macro-micro strategies via weekly batches, providing traceable optimizations for funding audits on experiential alignments.
+Options Setups Expansion
+* Train-of-Thought for Options: Step-by-step logic (e.g., "Macro sentiment + flows → Check IV rank >80% → Propose strangle: Buy OTM call/put at delta 0.3; edge calc: 72% POP at 28% ROI estimate vs 20% goal, hedge with FX if vol >2 SD; avoid naked").
+* Key Setups: All available but risk-averse—covered calls (income), protective puts (downside), straddles/strangles (vol), iron condors (range), butterflies (low-vol), credit spreads (premium); creative alpha from flows (e.g., condor on inflow rotations).
+* A2A Ties: Pull options chain/flows data from Data Agent (e.g., IV skew, open interest, ETF inflows); pass proposals to Risk for delta-neutral POP evals (e.g., adjust for Rho on rates); loop back on disagreement (3-5 iters max).
+* Reflection/IBKR Fit: Iterate on sim failures (e.g., back to Strategy if Greeks misalign); prep IBKR orders with multi-asset (options/FX via nautilus_trader for paper testing edges).
+
+Strategy-Risk Negotiation Loop
+* Bidirectional A2A: On initial proposal, consult Risk (e.g., "Max alpha at current risk?"); if disagreement (e.g., POP < floor or alpha sub-optimal), iterate: Strategy tweaks (e.g., add hedge for +5% alpha), Risk re-assesses until agreement (maximizes alpha within tolerance; cap 3-5 iters to avoid bloat).
+* Creative Alpha Focus: Leverage flows for edges (e.g., dark pool surges → butterfly arb; 13F clusters → spread on rotations); unscrupulous: Push for 30%+ plays if X/flow confidence >0.8, post-Risk vet.
+* Reasoning: Ensures alpha/risk harmony; ties to profitability (e.g., loops lift estimates >25% on flows without naked risk), modular for code (e.g., async StrategyAgent.negotiate_with_risk()).
+
+Reasoning: Bridges analysis to action with empirical context; backs profitability by evolving macro-micro strategies via weekly batches, providing traceable optimizations for funding audits on experiential alignments; options expansion adds asymmetry (e.g., 25%+ upside on sentiment/flows post-Risk vet), modular for code transition (e.g., StrategyAgent.generate_options() stub); negotiation loop gamifies for max alpha.

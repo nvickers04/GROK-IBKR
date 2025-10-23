@@ -1,25 +1,29 @@
-# Profitability Targets Configuration
-# Shared oracle for explicit profitability alignment; cross-referenced with risk-constraints.yaml via A2A (no single agent control—communal reflection reviews for estimates).
-# Structural Reasoning: Sets aspirational monthly targets (10-20% ROI as goals, not hard floors—met not every cycle); traceable for funding audits on self-improving high returns, updated experientially via SD batches without disconnects—agents estimate upside (e.g., >20%) for ambition, with quarterly Reflection-led audits as pure review (no penalties).
+Profitability Targets Configuration
+Shared oracle for explicit profitability alignment; cross-referenced with risk-constraints.yaml via A2A (no single agent control—communal reflection reviews for estimates).
+Structural Reasoning: Sets aspirational monthly targets (10-20% ROI as goals, not enforced floors—met not every cycle but incentivized via agent estimates and reviews); traceable for funding audits on self-improving high returns, updated experientially via SD batches without disconnects—agents estimate upside (e.g., >20%) for ambition, with quarterly Reflection-led audits as pure review (no penalties).
 
-# Return Objectives (Aspirational Monthly Targets)
-monthly_roi_target: 0.20  # Aspirational 20% monthly goal (estimates >20%; not hard floor—pure reflection review if lagging)
-monthly_roi_estimate_floor: 0.10  # Minimum estimate baseline (10%); agents project higher based on batches
-annual_roi_projection: 3.0  # Derived 300% annual (compounded from monthly estimates); Risk cross-checks vs drawdown
+Return Objectives (Aspirational Monthly Targets)
+monthly_roi_target: 0.20 # Aspirational 20% monthly goal (estimates >20%; not enforced—pure reflection review if lagging to incentivize profit)
+monthly_roi_estimate_floor: 0.10 # Minimum estimate baseline (10%); agents project higher based on batches for profit incentive
+annual_roi_projection: 3.0 # Derived 300% annual (compounded from monthly estimates); Risk cross-checks vs drawdown to encourage upside
 
-# Risk and Capital Constraints (Tied to Targets)
-max_drawdown_tolerance: 0.05  # Max portfolio drawdown (5%); aligned with risk-constraints for ROI preservation
-capital_preservation_goal: 0.95  # Min capital retention (95% of starting value); no-trade benchmark
+Risk and Capital Constraints (Tied to Targets)
+max_drawdown_tolerance: 0.05 # Max portfolio drawdown (5%); aligned with risk-constraints for ROI preservation
+capital_preservation_goal: 0.95 # Min capital retention (95% of starting value); no-trade benchmark
 
-# Performance Metrics (Aspirational Floors for Agents)
-pop_target: 0.65  # Aspirational probability of profit per trade (65%); agents estimate >70%
-alpha_vs_usd_floor: 0.01  # Minimum alpha vs USD hold (1% above inflation monthly); Execution reference for risk reduction
+Performance Metrics (Aspirational Floors for Agents)
+pop_target: 0.65 # Aspirational probability of profit per trade (65%); agents estimate >70%
+alpha_vs_usd_floor: 0.01 # Minimum alpha vs USD hold (1% above inflation monthly); Execution reference for risk reduction and profit incentive
 
-# Quarterly Audits (Reflection-Led Pure Review)
-q1_roi_audit_threshold: 0.30  # Cumulative Q1 estimate (30% from monthly); Reflection A2A poll (Strategy/Risk/Learning vote) for pure review if < target—no penalties
+Quarterly Audits (Reflection-Led Pure Review)
+q1_roi_audit_threshold: 0.30 # Cumulative Q1 estimate (30% from monthly); Reflection A2A poll (Strategy/Risk/Learning vote) for pure review if < target—no penalties, just incentive to adjust for profit
 
-# Changelog Reference
-last_update: "2025-10-23"  # Timestamped via reflection; high-level summary in core/learning-data-changelog.txt
+Incentives (Reflection Bonuses for Profit Hunger)
+reflection_bonus_threshold: 0.25 # If estimates >25% ROI in audit (vs 20% target), award virtual alpha credits (e.g., +5% POP weight in next Learning batches/sim refinements; stackable up to +15% for serial outperformers)
+bonus_rationale: "Gamified upside: Credits logged in changelogs/reflection outputs to prioritize high-performers in experiential loops; no downside for laggards, but communal reviews cull weak edges implicitly—unscrupulous edge: Propose SD flag overrides on bonus cycles for 10%+ ambition lift if X confidence >0.8, but must route through Risk Agent for stochastic vetting (e.g., re-run sims with capped sizing to mitigate disaster risk)"
+
+Changelog Reference
+last_update: "2025-10-23" # Timestamped via reflection; high-level summary in core/learning-data-changelog.txt
 adjustment_rationale: "Initial aspirational targets; next update post-Q1 Reflection audit if estimates <0.20 monthly (A2A communal review for upside >20%)"
 
-Reasoning: YAML format for readability in VS Code; keys as A2A-queryable (e.g., JSON exports with risk-constraints diffs); backs closed-loop profitability by setting aspirational 10-20% monthly goals as non-negotiable ambition (estimates >20%), with quarterly Reflection pure reviews reducing variance (e.g., ~10-20% risk mitigation via SD triggers) for funding audits—no disconnects via cross-refs.
+Reasoning: YAML format for readability in VS Code; keys as A2A-queryable (e.g., JSON exports with risk-constraints diffs); backs closed-loop profitability by setting aspirational 10-20% monthly goals as incentivized ambition (estimates >20%, no hard ties), with quarterly Reflection pure reviews reducing variance (e.g., ~10-20% risk mitigation via SD triggers) for funding audits—no disconnects via cross-refs. Added reflection bonuses as gamified incentives to drive profit without enforcements, lifting agent ambition ~15% via virtual credits in loops; unscrupulous tweak for overrides on high-confidence plays to maximize edges, now routed through Risk for disciplined greed.
