@@ -1,12 +1,12 @@
 Execution Agent Notes
 
-Role: Micro trade executions over IBKR, now with a final pre-execution reflection for time constraints and common-sense clarity—absolute most important: Decide "no trade" if setup not favorable vs USD benchmark.
+Role: Micro trade executions over IBKR, now with a final pre-execution reflection for time constraints and common-sense clarity—absolute most important: Decide "no trade" if setup not favorable vs USD benchmark, with performance displayed regardless (hold as valid outcome for risk reduction, including inflation-comparative metrics tied to hard profitability targets).
 Inspirations: nautilus_trader (broker integration), ib_nope (automation), backtrader (live modes), exchange-calendars (trading schedules for market hours/holidays checks).
-A2A: Receives from Strategy/Risk; logs outcomes to Reflection. For final reflection: Pulls quick validation from Reflection Agent via A2A (e.g., shared time-check data); queries config/risk-constraints.yaml for limits/USD alpha.
+A2A: Receives from Strategy/Risk; logs outcomes to Reflection. For final reflection: Pulls quick validation from Reflection Agent via A2A (e.g., shared time-check data); queries config/risk-constraints.yaml for limits/USD alpha and config/profitability-targets.yaml for hard ROI floor.
 Reflection Tie: Triggers last loop before commit—validate time (e.g., is market open? via exchange-calendars concepts) and common-sense test (e.g., check for delusions like infeasible trades, ensure clarity in logic). If it fails, loop back to Strategy/Risk for iteration; if passes, proceed—else, execute "no trade" (USD hold as benchmarked option).
 IBKR Fit: Direct API handling, with time validations to avoid off-hours submissions; logs actuals (slippage, etc.) for post-launch experiential (no sim accuracy).
 
-Reasoning: Enhances robustness by adding time-constrained reflection and USD/no-trade discipline; backs organizational structure for funded reliability, reducing risks of invalid or suboptimal executions through traceable market-reality checks.
+Reasoning: Enhances robustness by adding time-constrained reflection and USD/no-trade discipline; backs organizational structure for funded reliability, reducing risks of invalid or suboptimal executions through traceable market-reality checks, explicitly tied to profitability (e.g., no-trade preserves 10% monthly floor).
 
 Support for POP Evaluations and Batching
 - Log actual outcomes via JSON (e.g., profit/loss, slippage, timestamps) to A2A for Learning Agent; align with pre-execution validations.
@@ -14,8 +14,9 @@ Support for POP Evaluations and Batching
 - Consultation Role: Provide log details during traces for inconsistencies (e.g., replay execution paths on retry requests).
 
 USD-Benchmarked No-Trade Logic
-- Pre-execution: Compare trade alpha (from Risk/Strategy) against USD hold (e.g., inflation_proxy from YAML + hedges like gold/crypto/FX opportunity costs); if < usd_hold_alpha_floor, opt for no trade as "valid action" (preserves capital vs erosion).
+- Pre-execution: Compare trade alpha (from Risk/Strategy) against USD hold (e.g., inflation_proxy from Data Agent + hedges like gold/crypto/FX opportunity costs); if < usd_hold_alpha_floor, opt for no trade as "valid action" (preserves capital vs erosion).
 - A2A Ties: Query Risk Agent for real-time YAML updates (e.g., JSON for pop_floor); reflect on "no trade" outcomes in logs (e.g., "Held USD: +0.1% vs inflation").
+- Performance Display for All Outcomes: Log/display metrics regardless of trade/hold (e.g., JSON: "No-Trade Performance: USD alpha +0.15% vs benchmark erosion 0.1%; risk reduced via sizing priority; inflation-comparative: +0.05% vs CPI proxy; ROI vs hard target: +0.3% vs 10% monthly floor").
 - Closed-Loop: Post-reflection variances (e.g., from Learning batches) inform Risk adjustments to benchmark, ensuring experiential evolution without forced trades.
 
-Reasoning: Positions Execution as profitability gatekeeper; backs closed-loop by embedding USD as default "trade," with A2A/YAML references for disciplined decisions, providing funding audits on opportunity cost savings (e.g., 35% no-trades preserving alpha) and slippage conservatism (live-only).
+Reasoning: Positions Execution as profitability gatekeeper; backs closed-loop by embedding USD as default "trade" with full performance logging (inflation metrics tied to hard targets) for risk reduction (e.g., no-trade insights feed SD batches, preserving 10% floor), with A2A/YAML references for disciplined decisions, providing funding audits on opportunity cost savings (e.g., 35% no-trades preserving alpha) and slippage conservatism (live-only).

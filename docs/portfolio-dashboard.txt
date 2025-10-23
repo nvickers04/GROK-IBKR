@@ -1,0 +1,9 @@
+# Portfolio Dashboard Outline
+
+Text-based instructions for a net account value "page" (pre-code concept: A2A-shared view in Risk/Execution for reflection audits).
+- **Net Account Value Tracking**: Aggregate from IBKR pulls (via Execution) and Data Agent macro (e.g., USD benchmark); display: Current Value | Delta vs Last Cycle | Inflation-Adjusted (proxy from Data).
+- **Token Expenses**: Log costs (e.g., Grok API tokens as % drag: "Week 42: $50 tokens = 0.2% portfolio impact"); A2A from config for reflection (e.g., if >1%, option to trigger Risk YAML tweak to max_daily_trades—loose tie, not implemented now).
+- **Performance Metrics**: Include no-trade logs (e.g., "Held USD: +0.15% vs CPI 0.1%"); quarterly summaries for Learning batches.
+- **A2A Ties**: Risk broadcasts dashboard DataFrame; Reflection reviews for edges (e.g., "Expenses > benchmark: Refine batch frequency"—optional trigger for testing).
+
+Reasoning: Modular snapshot for risk reduction; backs closed-loop by quantifying operational drags (tokens as implicit risk) loosely, tying to profitability via inflation-adjusted audits (e.g., "Net Value +3.2%; token drag -0.5%") without code—scalable for funded dashboards with optional trigger flexibility.

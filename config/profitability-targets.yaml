@@ -1,0 +1,22 @@
+# Profitability Targets Configuration
+# Hard, non-negotiable baseline for explicit profitability alignment; cross-referenced with risk-constraints.yaml via A2A (no single agent control—communal reflection reviews for estimates).
+# Structural Reasoning: Sets aggressive monthly hard targets (10-20% ROI floor) as system north star; traceable for funding audits on self-improving high returns, updated experientially via SD batches without disconnects—agents estimate upside (e.g., >20%) but never below floor.
+
+# Return Objectives (Hard Monthly Targets)
+monthly_roi_floor: 0.10  # Non-negotiable 10% minimum monthly return; reflection triggers if breached (e.g., tighten constraints)
+monthly_roi_target: 0.20  # Hard 20% monthly goal; agents estimate higher (e.g., Strategy: "25% via X sentiment"), audited quarterly
+annual_roi_projection: 3.0  # Derived 300% annual (compounded from monthly); Risk cross-checks vs drawdown
+
+# Risk and Capital Constraints (Tied to Targets)
+max_drawdown_tolerance: 0.05  # Max portfolio drawdown (5%); hard cap to protect ROI floor (aligned with risk-constraints)
+capital_preservation_goal: 0.95  # Min capital retention (95% of starting value); no-trade benchmark for monthly alpha
+
+# Performance Metrics (Hard Floors for Agents)
+pop_target: 0.65  # Minimum probability of profit per trade (65%); hard for Execution approval (agents estimate >70%)
+alpha_vs_usd_floor: 0.01  # Minimum alpha vs USD hold (1% above inflation monthly); hard for no-trade logic
+
+# Changelog Reference
+last_update: "2025-10-23"  # Timestamped via reflection; high-level summary in core/learning-data-changelog.txt
+adjustment_rationale: "Initial hard monthly targets; next update post-Q1 reflection if ROI < 0.10 (A2A communal review for estimates >0.20)"
+
+Reasoning: YAML format for readability in VS Code; keys as A2A-queryable (e.g., JSON exports with risk-constraints diffs); backs closed-loop profitability by enforcing hard 10-20% monthly floors as non-negotiable, with agent estimates for upside—reduces variance (e.g., ~10-20% risk mitigation via SD triggers) for funding audits, ensuring ROI ambition without over-risk.

@@ -1,12 +1,12 @@
 Data Agent Notes
 
-Role: Macro data ingestion and processing for A2A feeds.
-Inspirations: yfinance (real-time queries), tsfresh (feature extraction), Qlib (data pipelines).
-A2A: Outputs cleaned DataFrames to Strategy/Risk Agents.
-Reflection Tie: Provides historical data for backtest reviews.
-IBKR Fit: Complements pulls with external validation.
+Role: Macro data ingestion and processing for A2A feeds—expanded to include contextual research (e.g., credible financial updates from X tools for sentiment/events as reasoning reference).
+Inspirations: yfinance (real-time queries), tsfresh (feature extraction), Qlib (data pipelines); X tools (x_semantic_search/keyword for verified sources like Musk/Trump).
+A2A: Outputs cleaned DataFrames to Strategy/Risk Agents; shares JSON summaries of contextual updates (e.g., "Trump tariff sentiment: Bearish FX").
+Reflection Tie: Provides historical data for backtest reviews; contextual feeds for narrative reflections.
+IBKR Fit: Complements pulls with external validation; inflation_proxy sourced here (e.g., macro CPI/FX trends for USD benchmark).
 
-Reasoning: Organizes inputs for broad view; backs traceability by automating features for ML edges in funded phases.
+Reasoning: Organizes inputs for broad market view; backs traceability by automating features for ML edges in funded phases, now with credible X research as reasoning support (not sole input) for gap-filling without overload.
 
 Weekly Adaptations from Learning Agent
 - Receive batched DataFrames via A2A from Learning Agent (e.g., stochastic variance summaries with SD thresholds).
@@ -14,4 +14,10 @@ Weekly Adaptations from Learning Agent
 - A2A Integration: Use shared DataFrames for reference snapshots; respond to consultations on input inconsistencies (e.g., trace incomplete logs back to ingestion gaps).
 - Changelog: Log high-level implementations in core/learning-data-changelog.txt (e.g., "Implemented Week 42 batch: Enhanced feature coverage +15%; pre/post SD variance noted").
 
-Reasoning: Anchors macro inputs with empirical stability; ensures broad market views adapt deliberately via weekly/SD batches, backing structural traceability for funding audits on how refinements mitigate real-vs-theoretical gaps in IBKR executions.
+Contextual Research Submodule (Folded Research)
+- Pull credible financial updates via X tools (e.g., x_semantic_search "Musk Tesla earnings sentiment from:verified min_faves:500" or x_keyword_search "Trump policy OR tariffs filter:news from:verified"); focus on verified accounts as reasoning reference (e.g., sentiment trends inform Strategy, not direct trades).
+- Process into JSON summaries (e.g., sentiment scores, event impacts) or DataFrames (tabular trends); feed A2A to Strategy for narrative context (e.g., adjust proposals on tweet-driven volatility).
+- Inflation Proxy Sourcing: Aggregate macro feeds (e.g., CPI/FX from yfinance) for dynamic usd_hold_alpha_floor; share via A2A to Execution/Risk.
+- Reflection Tie: Historical X data for backtest narratives (e.g., "Tweet event variance in Zipline sims").
+
+Reasoning: Folds Research modularly into macro hub; ensures credible, non-real-time gaps (e.g., verified X sentiment) enrich strategies as reasoning support (e.g., 20% alpha lift in sims), backing closed-loop profitability via experiential A2A and inflation dynamism for USD benchmarks without over-reliance on noisy data.

@@ -1,19 +1,24 @@
 Learning Agent Notes
 
-Role: ML-driven edge refinement from experience.
+Role: ML-driven edge refinement from experience—parallel sim training to accelerate proficiency without excessive trades.
 Inspirations: FinRL-Library (RL training), tf-quant-finance (model calibration), Qlib (full ML).
-A2A: Integrates Reflection data; updates models for Strategy/Risk.
-Reflection Tie: Applies iterations to probabilities.
-IBKR Fit: Adapts to real data patterns.
+A2A: Integrates Reflection data; updates models for Strategy/Risk (no direct constraint adjustments).
+Reflection Tie: Applies iterations to probabilities; runs offline sims concurrently with real data.
+IBKR Fit: Adapts to real data patterns; sims complement paper trading.
 
-Reasoning: Enables adaptive system; traceable backups for funded ML profitability.
+Reasoning: Enables adaptive system; traceable backups for funded ML profitability with parallel sim acceleration.
 
 Weekly Batching for Stochastic Evaluations
-- Aggregate daily JSON logs from Risk Agent (e.g., stochastic runs like Monte Carlo paths via tf-quant-finance inspirations) into weekly DataFrames for variance analysis (actual vs theoretical POP).
+- Aggregate daily JSON logs from Risk Agent (e.g., stochastic runs like Monte Carlo paths via tf-quant-finance) into weekly DataFrames for variance analysis (actual vs theoretical POP).
 - Compute metrics: Mean variance from stochastic baselines; trigger if observed > mean +1 SD (e.g., >12% in simulations).
-- A2A Formats: JSON for incoming lightweight event logs (e.g., individual sim details); DataFrames for batched outputs (tabular summaries for analysis).
-- Handling Incomplete Logs: Retry A2A requests; consult Data Agent for input inconsistencies, then trace via Strategy (proposal alignment), Risk (POP baselines), Execution (log completeness) for end-to-end validation.
-- Batch Sharing: Distribute weekly DataFrame references via A2A to Data, Strategy, Risk, and Execution Agents as contextual snapshots (e.g., "Use for next-cycle adjustments").
+- A2A Formats: JSON for incoming lightweight event logs (e.g., individual sim details); DataFrames for batched outputs (tabular analysis).
+- Handling Incomplete Logs: Retry A2A requests; consult Data Agent for input inconsistencies, then trace via Strategy/Risk/Execution for end-to-end validation.
+- Batch Sharing: Distribute weekly DataFrame references via A2A to Data, Strategy, Risk, Execution Agents as contextual snapshots (e.g., "Use for next-cycle adjustments").
 - Changelog: Generate high-level entry in core/learning-data-changelog.txt (e.g., "Week 42: SD-triggered volatility refinement; batch variance reduced 8%").
 
-Reasoning: Centralizes experiential hub with statistical rigor; backs profitability by filtering randomness in stochastic data via weekly/SD cycles, providing auditable A2A traces for funding without daily over-adjustments.
+Parallel Simulation Training
+- Run offline Zipline sims (historical backtests for sizing/hold days) and tf-quant-finance sims (stochastic POP variance projections) in parallel with real experiential data.
+- Store results in docs/sim-training-log.txt (e.g., "Sim Week 42: Zipline +5% sizing accuracy; tf +3% variance fit").
+- Feed sim outputs to weekly batches for model updates (e.g., blend with IBKR paper trading insights pre-launch).
+
+Reasoning: Accelerates ML proficiency with parallel sims (e.g., 5-10% edge lift without trades); backs closed-loop profitability by enriching batches with simulated data, traceable for funding audits without live risk or years-long training.
