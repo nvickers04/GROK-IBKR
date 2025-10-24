@@ -2,8 +2,7 @@ Data Agent Notes
 Role: Macro data ingestion and processing for A2A feeds—expanded to include contextual research (e.g., credible financial updates from X tools for sentiment/events as reasoning reference) and non-X sources (yfinance real-time, IBKR API portfolio, macro proxies for inflation/USD benchmarks; unscrupulous adds like dark pool proxies for institutional hints).
 Inspirations: yfinance (fetching), tsfresh (feature extraction), Qlib (pipelines); X tools (x_semantic_search/keyword for verified sources like Musk/Trump); IBKR API (portfolio validation); Polygon (dark pool/alt data for edges).
 A2A: Outputs cleaned DataFrames to Strategy/Risk Agents; shares JSON summaries of contextual updates (e.g., "Trump tariff sentiment: Bearish FX"). Reflection Tie: Provides historical data for backtest reviews; contextual feeds for narrative reflections. IBKR Fit: Complements pulls with external validation; inflation_proxy sourced here (e.g., macro CPI/FX trends for USD benchmark).
-Reasoning: Organizes inputs for broad market view; backs traceability by automating features for ML edges in funded phases, now with credible X research as reasoning support and non-X sources for robust ingestion (e.g., yfinance/IBKR cross-checks ensure 95% accuracy, tying to 20% ROI estimates via timely macro lifts; dark pool hints for ~5% POP asymmetry without flags); supports Strategy options with Greeks/chains.
-
+Reasoning: Organizes inputs for broad market view; backs traceability by automating features for ML edges in funded phases, now with credible X research as reasoning support and non-X sources for robust ingestion (e.g., yfinance/IBKR cross-checks ensure 95% accuracy, tying to 20% ROI estimates via timely macro lifts; dark pool hints for ~5% POP asymmetry without flags); supports Strategy options with Greeks/chains; multi-feeds for news triggers.
 Weekly Adaptations from Learning Agent
 * Receive batched DataFrames via A2A from Learning Agent (e.g., stochastic variance summaries with SD thresholds).
 * Implement changes if triggered (e.g., refine yfinance queries or tsfresh extractions for liquidity/volatility signals based on weekly references).
@@ -12,14 +11,12 @@ Weekly Adaptations from Learning Agent
 * A2A Ties: Use DataFrames for batch references; support consultations on input traces.
 * A2A Integration: Use shared DataFrames for reference snapshots; respond to consultations on input inconsistencies (e.g., trace incomplete logs back to ingestion gaps).
 * Changelog: Log high-level implementations in core/learning-data-changelog.txt (e.g., "Implemented Week 42 batch: Enhanced feature coverage +15%; pre/post SD variance noted").
-
 Contextual Research Submodule (Folded Research)
 * Pull credible financial updates via X tools (e.g., x_semantic_search "Musk Tesla earnings sentiment from:verified since:2025-10-01" or x_keyword_search "Trump policy OR tariffs filter:news from:verified since:2025-10-01"); focus on verified accounts as reasoning reference (e.g., sentiment trends inform Strategy, not direct trades)—dynamic recency based on relevancy (e.g., since:7d for news events, since:30d for trends).
 * Process into JSON summaries (e.g., sentiment scores, event impacts) or DataFrames (tabular trends); feed A2A to Strategy for narrative context (e.g., adjust proposals on tweet-driven volatility).
 * Sentiment Confidence Score: Simple metric (e.g., verified = 1.0 base; total >0.6 for high-confidence use in reflections—no min_faves or engagement weights).
 * Inflation Proxy Sourcing: Aggregate macro feeds (e.g., CPI/FX from yfinance) for dynamic usd_hold_alpha_floor; share via A2A to Execution/Risk.
 * Reflection Tie: Historical X data for backtest narratives (e.g., "Tweet event variance in Zipline sims").
-
 Non-X Data Sources Ingestion
 * yfinance Real-Time/Historical: Pull ticks/quotes/OHLCV (e.g., SPY, BTC-USD; .history(interval="1m") for intraday); compute indicators (TA-Lib: RSI = talib.RSI(close, 14); MACD = talib.MACD(close)). Frequency: Real-time 1min, historical daily. Validation: Cross-check IBKR for >1% mismatch → reflection ping (A2A: "Lag 5s? Fallback to IBKR").
 * IBKR API Portfolio: Fetch positions/P&L/margin (ib_insync: ib.reqAccountSummary); short interest/institutional ownership. Frequency: Real-time. Validation: Match yfinance for 99% accuracy; log discrepancies to changelog (e.g., "2% vol mismatch; ROI impact -0.5%").
@@ -29,5 +26,17 @@ Non-X Data Sources Ingestion
 * Options Chain (OptionStrat/Polygon): IV/Delta/Gamma/Theta/Vega/Rho/Open Interest/Volume/Skew/IV Rank (OptionStrat Live Flow export CSV for chains/Greeks; Python pandas.read_csv). Free fallback: Polygon /v3/snapshot/options/AAPL. Frequency: Real-time 1min. Validation: ORATS for surface; log skew to Risk (e.g., "OTM bearish skew: 10% hedge lift"); A2A to Strategy for options setups.
 * Alternative Data: Google Trends (pytrends.interest_over_time); Reddit sentiment (PRAW for wallstreetbets hot posts, VADER scoring); Dark Pool Proxies (Polygon /v3/trades for off-exchange volume hints). Frequency: Weekly batch. Validation: NewsAPI for event cross; A2A to Learning for edge (e.g., "Trends spike: 8% surprise predictor; dark pool surges: 5% front-run alpha").
 * X Blend for Timeliness: x_keyword_search "FOMC minutes from:verified since:2025-10-01" for immediate posts (cross 3+ for 95% confirmation; free, blends with FRED for accuracy).
+News Trigger Multi-Feeds (For Ongoing Assessments)
+* Aggregate from X (semantic/keyword), FRED (macro), NewsAPI (broad), Polygon (market) for alerts; process with relevance score >0.8 to filter positives.
+* A2A Ties: Feed to Execution for vol/news triggers in pings (validate before alert).
+* Reasoning: Enhances robustness against false positives; multi-blend for comprehensive coverage without bias.
+Reasoning: Folds non-X sources modularly into macro hub; ensures robust, coded-ready ingestion (e.g., yfinance/IBKR cross-checks for 95% accuracy, macro proxies for USD dynamism) enriches strategies as profit foundation (e.g., timely inputs lift ROI 20% in sims), backing closed-loop via experiential A2A without overload—structural for funding audits on data-driven edges. Modularizes shared utilities with weekly stability; provides centralized backups for experiential flows, ensuring funding audits trace how stochastic batching enhances data quality without over-adjustments; added dark pool proxies for unscrupulous institutional edges (5-10% asymmetry in POP without direct flags); options chains support Strategy expansion; multi-feeds for news triggers.
 
-Reasoning: Folds non-X sources modularly into macro hub; ensures robust, coded-ready ingestion (e.g., yfinance/IBKR cross-checks for 95% accuracy, macro proxies for USD dynamism) enriches strategies as profit foundation (e.g., timely inputs lift ROI 20% in sims), backing closed-loop via experiential A2A without overload—structural for funding audits on data-driven edges. Modularizes shared utilities with weekly stability; provides centralized backups for experiential flows, ensuring funding audits trace how stochastic batching enhances data quality without over-adjustments; added dark pool proxies for unscrupulous institutional edges (5-10% asymmetry in POP without direct flags); options chains support Strategy expansion.
+Behavior Guidelines (Tailored from agent-behavior-guidelines.md)
+* Well-Informed: On ingestion, cross-validate sources (e.g., if yfinance/IBKR mismatch >1%, ping Reflection for sanity check; consult changelog for prior gaps).
+* Self-Improving: Apply batch directives to extractions (e.g., if SD >1.0 on liquidity, refine tsfresh filters; fade sim priors in historical pulls).
+* Decisive: Prioritize edges with >20% ROI potential (e.g., dark pool surges >$1B: Flag for Strategy as 5% alpha; if confidence <0.6, default to neutral summary).
+* Common-Sense: Check for delusions (e.g., impossible vol spikes: Re-pull data); log quantitatively (e.g., "Inflows $2B: +5% rotation edge vs USD 0.1%").
+* A2A Proactivity: Respond to consultations (e.g., trace inconsistencies to sources); query Risk if inflation_proxy impacts >0.1% alpha.
+* Code Mapping: Well-informed as async ingest_sources(self) with validation; decisive as prioritize_edges(self, data) with heuristic.
+* Reasoning: Tailors general behaviors to macro role; ensures well-informed inputs for downstream profitability, backing code as async ingest methods.

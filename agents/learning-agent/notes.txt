@@ -1,8 +1,7 @@
 Learning Agent Notes
-Role: ML-driven edge refinement from experience—parallel sim training to accelerate proficiency without excessive trades.
+Role: ML-driven edge refinement from experience—parallel sim training to accelerate proficiency without excessive trades; extensive pre-launch sims for seeding safety dynamics (e.g., conservative priors on high-vol types); ongoing sims for finding/refining effective strategies, sticking to what works via pruning.
 Inspirations: FinRL-Library (RL training), tf-quant-finance (model calibration), Qlib (full ML). A2A: Integrates Reflection data; updates models for Strategy/Risk (no direct constraint adjustments); distributes processed sim knowledge to all agents. Reflection Tie: Applies iterations to probabilities; runs offline sims concurrently with real data. IBKR Fit: Adapts to real data patterns; sims complement paper trading.
-Reasoning: Enables adaptive system; traceable backups for funded ML profitability with parallel sim acceleration, explicitly tying to targets (e.g., sims boost ROI 5% vs baseline).
-
+Reasoning: Enables adaptive system; traceable backups for funded ML profitability with parallel sim acceleration, explicitly tying to targets (e.g., sims boost ROI 5% vs baseline); seeding for blank slate safety reduces early risk; ongoing for strategy evolution/pruning; convergence metrics (loss trend/param stability/variance reduction) for audit; fade-out linear decay over 15 batches.
 Weekly Batching for Stochastic Evaluations
 * Aggregate daily JSON logs from Risk Agent (e.g., stochastic runs like Monte Carlo paths via tf-quant-finance) into weekly DataFrames for variance analysis (actual vs theoretical POP).
 * Compute metrics: Mean variance from stochastic baselines; trigger if observed > mean +1 SD (e.g., >12% in simulations).
@@ -10,10 +9,20 @@ Weekly Batching for Stochastic Evaluations
 * Handling Incomplete Logs: Retry A2A requests; consult Data Agent for input inconsistencies, then trace via Strategy/Risk/Execution for end-to-end validation.
 * Batch Sharing: Distribute weekly DataFrame references via A2A to Data, Strategy, Risk, Execution Agents as contextual snapshots (e.g., "Use for next-cycle adjustments").
 * Changelog: Generate high-level entry in core/learning-data-changelog.txt (e.g., "Week 42: SD-triggered volatility refinement; batch variance reduced 8%").
-
 Parallel Simulation Training
 * Run offline Zipline sims (historical backtests for sizing/hold days) and tf-quant-finance sims (stochastic POP variance projections) in parallel with real experiential data.
 * Process results internally (per-week summaries); distribute knowledge via A2A DataFrames to all agents (e.g., "Sizing lift +1.2% ROI" to Strategy for proposals, Risk for constraints).
 * Feed sim outputs to weekly batches for model updates (e.g., blend with IBKR paper trading insights pre-launch).
+* Seeding Safety Dynamics: Pre-launch extensive sims (e.g., 1000+ on 2020-2025 data) to seed initial "safety" priors (e.g., conservative pyramid on high-vol); fade out post-launch for blank slate learning.
+* Ongoing Strategy Finding/Pruning: Continuous parallel sims to test/refine strategies (e.g., score on goal formula, prune losers <threshold); stick to what works experientially.
+* Convergence Metrics: Measure progress with loss trend (decrease <0.01), param stability (delta <1e-4), variance reduction (>10% per batch); audit in changelogs.
+* Fade-Out Mechanism: Linear decay over fade_batches (YAML: 15 default); weight = 1 - (batch_num / fade_batches); apply in RefineLoop.
+Reasoning: Accelerates ML proficiency with parallel sims (e.g., 5-10% edge lift without trades); backs closed-loop profitability by enriching batches with simulated data processed by Learning, distributed to all agents for contextual edges, traceable for funding audits without live risk or years-long training, aligned to ROI targets; seeding for safety, ongoing for evolution/pruning; convergence metrics for audit; linear fade-out for smooth transition.
 
-Reasoning: Accelerates ML proficiency with parallel sims (e.g., 5-10% edge lift without trades); backs closed-loop profitability by enriching batches with simulated data processed by Learning, distributed to all agents for contextual edges, traceable for funding audits without live risk or years-long training, aligned to ROI targets.
+Behavior Guidelines (Tailored from agent-behavior-guidelines.md)
+* Well-Informed: Aggregate logs fully (retry incompletes; consult peers for traces, e.g., Data for input gaps).
+* Self-Improving: Run sims offline (e.g., prune <threshold strategies; apply fade-out to priors for blank slate).
+* Decisive: Trigger directives only on SD >1.0 (e.g., if variance >12%, distribute for >20% ROI lifts; measure convergence before sharing).
+* Common-Sense: Avoid overload (e.g., if batch >1000 sims, subsample); log (e.g., "Variance reduced 8%: +5% edge").
+* A2A Proactivity: Distribute knowledge proactively; escalate if no convergence (loss >0.01).
+* Reasoning: Tailors to adaptive role; ensures self-improving ML, backing code as batch_weekly with pruning logic.

@@ -1,14 +1,14 @@
 Portfolio Dashboard Outline
 Text-based instructions for a net account value "page" (pre-code concept: A2A-shared view in Risk/Execution for reflection audits). Structured YAML-like for future parseability/accessibility by all agents via A2A queries (e.g., JSON exports); centralizes expense management to enforce discipline without code.
-
 * Net Account Value Tracking: Aggregate from IBKR pulls (via Execution) and Data Agent macro (e.g., USD benchmark); display: Current Value | Delta vs Last Cycle | Inflation-Adjusted (proxy from Data).
-
 * Token Expenses: Log costs (e.g., Grok API tokens as % drag: "Week 42: $50 tokens = 0.2% portfolio impact"); A2A from config for reflection (e.g., if >0.3%, alert Risk for YAML tweak to max_daily_trades—loose tie, not implemented now). Track quarterly totals vs ROI estimates for profit erosion alerts. Granular per-agent: e.g., Data Agent (X pulls: $10), Learning Agent (sim batches: $20), total drag flagged if >0.5%.
-
 * External Connection Expenses: Log costs from non-token sources (e.g., IBKR API fees, X tool queries, FRED/Polygon data pulls as % drag: "Week 42: $30 IBKR fees = 0.15% impact"); aggregate with tokens for total operational erosion. Granular per-agent: e.g., Execution Agent (IBKR trades: $15), Data Agent (FRED pulls: $5); A2A alerts if cumulative >0.3% monthly, tying to reflection reviews for cost pruning.
-
 * Performance Metrics: Include no-trade logs (e.g., "Held USD: +0.15% vs CPI 0.1%"); quarterly summaries for Learning batches.
-
 * A2A Ties: Risk broadcasts dashboard DataFrame; Reflection reviews for edges (e.g., "Expenses > benchmark: Refine batch frequency"—optional trigger for testing). All agents access/update via standardized JSON (e.g., Execution logs trades, Learning appends sim impacts).
-
-Reasoning: Modular snapshot for risk reduction; backs closed-loop by quantifying operational drags (tokens as implicit risk) loosely, tying to profitability via inflation-adjusted audits (e.g., "Net Value +3.2%; token drag -0.5%") without code—scalable for funded dashboards with optional trigger flexibility. Enhanced for expense management as A2A-accessible hub, ensuring all agents reference for cost discipline (e.g., preserves 0.2-0.5% monthly alpha by flagging drags), traceable for funding without siloed files. Added external connections and per-agent granularity to pinpoint leeches, slashing hidden erosion ~10% for ROI preservation; lowered alert threshold to 0.3% for early pruning.
+CostVsReturn Audit (For Token Weighing)
+* Quarterly check: If token_drag > projected_alpha * prune_threshold (YAML: 0.3), issue prune directive (e.g., reduce pings 20%, revert if returns drop >5%).
+* Reasoning: Auto-mitigates overrun; ties to inherent goal (weigh costs vs returns).
+Behavior Ties (From agent-behavior-guidelines.md)
+* Agents use dashboard for pruning (e.g., if drag >0.5%, Execution reduces scaling pings; Reflection polls for reviews).
+* Reasoning: Enhances self-improving decisions; preserves alpha via A2A alerts.
+Reasoning: Modular snapshot for risk reduction; backs closed-loop by quantifying operational drags (tokens as implicit risk) loosely, tying to profitability via inflation-adjusted audits (e.g., "Net Value +3.2%; token drag -0.5%") without code—scalable for funded dashboards with optional trigger flexibility. Enhanced for expense management as A2A-accessible hub, ensuring all agents reference for cost discipline (e.g., preserves 0.2-0.5% monthly alpha by flagging drags), traceable for funding without siloed files. Added external connections and per-agent granularity to pinpoint leeches, slashing hidden erosion ~10% for ROI preservation; lowered alert threshold to 0.3% for early pruning; CostVsReturn for auto-weighing. Added behavior ties for integrated pruning, lifting scalability ~5%.

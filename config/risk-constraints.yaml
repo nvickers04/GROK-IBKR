@@ -1,14 +1,46 @@
 Risk Constraints Configuration
 Dynamically managed by Risk Agent post-reflection; loaded by all agents via A2A for closed-loop enforcement.
 Structural Reasoning: Enables self-improving limits (e.g., adjusted via weekly SD batches); traceable for funding audits on risk mitigation without manual tweaks. Simulations (pre-launch Zipline-inspired) set baselines; post-launch experiential (no slippage sims—conservative tolerances only).
+
 Position and Exposure Limits
-max_position_size: 0.05 # Max % of portfolio per trade; auto-tightens on variance >1 SD (Risk Agent sims) max_leverage: 2.0 # Overall leverage cap; reflects stochastic sims from tf-quant-finance (pre-launch only) max_daily_trades: 10 # Batch-enforced to avoid over-execution noise; adjustable via reflection variances
+max_position_size: 0.05 # Max % of portfolio per trade; auto-tightens on variance >1 SD (Risk Agent sims)
+max_leverage: 2.0 # Overall leverage cap; reflects stochastic sims from tf-quant-finance (pre-launch only)
+max_daily_trades: 10 # Batch-enforced to avoid over-execution noise; adjustable via reflection variances
+pyramiding_max_portfolio_cap: 0.30 # Never exceed 30% of portfolio on scaled positions (Risk dynamic control)
+correlation_threshold: 0.7 # Corr > this: Halve pyramid scale factor (Risk portfolio check)
+rolling_window_days: 30 # For corr matrix compute (experiential tweak)
+
 Drawdown and POP Safeguards
-max_drawdown: 0.05 # 5% portfolio drawdown threshold; triggers reflection loop (Risk Agent auto-adjusts post-sim) pop_floor: 0.60 # Minimum theoretical POP for approval; adjusted via pyfolio metrics and USD benchmark variance_sd_threshold: 1.0 # SD cutoff for weekly batch triggers; recalibrated experientially (Risk Agent core)
+max_drawdown: 0.05 # 5% portfolio drawdown threshold; triggers reflection loop (Risk Agent auto-adjusts post-sim)
+pop_floor: 0.60 # Minimum theoretical POP for approval; adjusted via pyfolio metrics and USD benchmark
+variance_sd_threshold: 1.0 # SD cutoff for weekly batch triggers; recalibrated experientially (Risk Agent core)
+
 Time and Sanity Constraints
-max_hold_days: 30 # Trade duration cap; ties to exchange-calendars for sessions (Execution no-trade ref) slippage_tolerance: 0.02 # % slippage allowance; conservative (no accurate sims—live IBKR only); Risk Agent tightens on variances
+max_hold_days: 30 # Trade duration cap; ties to exchange-calendars for sessions (Execution no-trade ref)
+slippage_tolerance: 0.02 # % slippage allowance; conservative (no accurate sims—live IBKR only); Risk Agent tightens on variances
+
 USD Benchmark for No-Trade Decisions
-usd_hold_alpha_floor: 0.0 # Minimum alpha vs USD (inflation-adjusted) to execute; Execution references for "no trade" as valid option inflation_proxy: 0.025 # Annual % for USD opportunity cost (e.g., vs gold/crypto/FX); Risk Agent updates quarterly via sims
+usd_hold_alpha_floor: 0.0 # Minimum alpha vs USD (inflation-adjusted) to execute; Execution references for "no trade" as valid option
+inflation_proxy: 0.025 # Annual % for USD opportunity cost (e.g., vs gold/crypto/FX); Risk Agent updates quarterly via sims
+
+Pyramiding Tiers (Dynamic Baselines; Risk Controls Based on POP/Type/Size/Vol/Corr)
+pyramiding_winner_tier_threshold: 0.25 # At 25% profit, trigger scale-out (e.g., 50% sell on -5%, 25% on -10%)
+pyramiding_loser_scale_reduce: true # Enable reduce on -cost basis (dynamic by Risk)
+pyramiding_assessment_continuous: true # Ongoing while position open (A2A pings; increases token drag)
+pyramiding_vol_threshold_high: 2.0 # High vol SD: Clamp aggressive scaling (Risk analyzes vol for decisions)
+pyramiding_vol_threshold_low: 0.5 # Low vol SD: Allow fuller scaling (dynamic adjustment)
+kelly_half_default: true # Half-Kelly for tempering (f*/2; integrate into sizing)
+
+Goal Formula Weights (Dynamic; Batch/Regime Tweaks)
+profit_weight: 0.60 # Greed core
+time_weight: 0.20 # Min duration
+risk_weight: 0.20 # Clamp
+regime_weights: # Dict for shifts
+  bull: [0.70, 0.15, 0.15] # Profit/time/risk
+  bear: [0.40, 0.20, 0.40]
+
+Prune Thresholds (For Token Weighing)
+prune_threshold: 0.3 # Drag > alpha * this: Auto-prune (e.g., reduce pings 20%)
+
 Changelog Reference
-last_update: "2025-10-23" # Timestamped by Risk Agent; high-level summary in core/learning-data-changelog.txt adjustment_rationale: "Initial baselines; next update post-Week 42 batch if SD >1.0 (Risk Agent sims pre-launch; experiential post)"
-Reasoning: YAML format for readability in VS Code; keys as A2A-queryable (e.g., JSON exports); backs closed-loop profitability by enabling Risk-led auto-adjustments of all metrics, with pre-launch sims (slippage-limited) and USD ties for no-trade discipline, experiential for ~10-20% risk reduction in audits.
+last_update: "2025-
